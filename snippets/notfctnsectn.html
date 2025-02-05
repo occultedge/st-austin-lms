@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* Light background */
+             /* Light background */
         }
 
         .notification-container {
@@ -27,9 +27,7 @@
             border-radius: 5px;
             z-index: 1000;
             white-space: nowrap;
-            animation: scroll 30s linear infinite;
-            display: flex;
-            justify-content: space-evenly;
+            animation: scroll 40s linear infinite; /* Slower scrolling */
         }
 
         .blink {
@@ -42,7 +40,6 @@
             text-decoration: none;
             color: #007bff; /* Blue color for the link */
             margin: 0 20px;
-            animation: scroll 30s linear infinite;
         }
 
         .link:hover {
@@ -63,19 +60,26 @@
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
+
+        .scrolling-content {
+            display: inline-block;
+            animation: scroll 40s linear infinite; /* Slower scrolling animation */
+        }
     </style>
 </head>
 <body>
     <div class="notification-container">
-        <a class="link" target="_blank">
-            <span class="blink">NEW</span> Your student login ID and password are now successfully activated. You can start using the system now.
-        </a>
-        <a href="https://docs.google.com/spreadsheets/d/1mhEHnxKWdbs4-9GgfhZiYVNJRyzlmunE/edit?gid=621465494#gid=621465494" class="link" target="_blank">
-            <span class="blink">NEW</span> Attention Students! Click here to view your Semester 1 course time table.
-        </a>
-        <a href="https://join.skype.com/shaeu6a4ncHh" class="link" target="_blank">
-            <span class="blink">NEW</span> Click here to attend the live online lecture on Skype.
-        </a>
+        <div class="scrolling-content">
+            <a class="link" target="_blank">
+                <span class="blink">NEW</span> Your student login ID and password are now successfully activated. You can start using the system now.
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1mhEHnxKWdbs4-9GgfhZiYVNJRyzlmunE/edit?gid=621465494#gid=621465494" class="link" target="_blank">
+                <span class="blink">NEW</span> Attention Students! Click here to view your Semester 1 course time table.
+            </a>
+            <a href="https://join.skype.com/shaeu6a4ncHh" class="link" target="_blank">
+                <span class="blink">NEW</span> Click here to attend the live online lecture on Skype.
+            </a>
+        </div>
     </div>
 </body>
 </html>
