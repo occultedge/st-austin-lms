@@ -8,35 +8,32 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 0;
             background-color: #f9f9f9;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Ensures proper alignment */
+            height: 100vh;
             box-sizing: border-box;
         }
 
         .action-links {
             display: flex;
-            flex-wrap: wrap; /* Allows buttons to wrap to the next line on smaller screens */
-            gap: 10px; /* Space between the buttons */
+            flex-wrap: wrap;
             justify-content: center;
-            max-width: 100%; /* Prevents container from overflowing */
+            gap: 10px;
+            width: 100%;
         }
 
         a {
             text-decoration: none;
             color: white;
             background-color: #007bff;
-            padding: 10px 15px;
+            padding: 8px 16px;
             border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
             font-size: 14px;
-            white-space: nowrap; /* Ensures the text stays in a single line */
-            max-width: 200px; /* Max width for each link */
-            text-align: center; /* Centers the text inside the link */
+            max-width: 200px;
+            text-align: center;
         }
 
         a:hover {
@@ -45,9 +42,9 @@
 
         @media (max-width: 600px) {
             a {
-                font-size: 12px; /* Smaller text size for mobile */
-                padding: 8px 12px; /* Adjust padding for smaller screens */
-                width: 100%; /* Make links fill the container on small screens */
+                font-size: 12px;
+                padding: 6px 12px;
+                width: 100%;
             }
         }
     </style>
@@ -55,12 +52,10 @@
 <body>
 
     <div class="action-links">
-        <a href="vdoplyryoutbecode.html" target="_blank">See a demo of LMS</a>
-        <a href="slctcrse.html" target="_blank">Medical Students Begin Learning Now</a>
-        <a href="https://www.orionfr.co.in/blank" target="_blank">Accounting Students Click Here</a>
-        <a href="https://www.orionfr.co.in/blank" target="_blank">Get your Login Details</a>
+        <a href="vdoplyryoutbecode.html" target="_blank">See Demo</a>
+        <a href="slctcrse.html" target="_blank">Begin Learning</a>
+        <a href="https://www.orionfr.co.in/blank" target="_blank">Submit Assignment</a>
     </div>
 
 </body>
 </html>
-
