@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4; /* Light background */
         }
 
         .notification-container {
@@ -17,7 +18,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background */
             color: black;
             padding: 10px;
             text-align: center;
@@ -26,12 +27,25 @@
             border-radius: 5px;
             z-index: 1000;
             white-space: nowrap;
-            animation: scroll 15s linear infinite;
+            animation: scroll 20s linear infinite;
         }
 
         .blink {
-            color: red;
+            color: #ff0000; /* Red color for "NEW" */
             animation: blink 1s step-end infinite;
+        }
+
+        .link {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #007bff; /* Blue color for the link */
+            animation: scroll 20s linear infinite;
+        }
+
+        .link:hover {
+            text-decoration: underline;
         }
 
         @keyframes scroll {
@@ -53,9 +67,12 @@
 <body>
 
     <div class="notification-container">
-        <span><span class="blink">NEW</span> Attention Medical Students feb batch. Your student login ID and password are now successfully activated on the system.</span>
+        <span><span class="blink">NEW</span> Your student login ID and password are now successfully activated. You can start using the system now.</span>
     </div>
+
+    <a href="https://docs.google.com/spreadsheets/d/1mhEHnxKWdbs4-9GgfhZiYVNJRyzlmunE/edit?gid=621465494#gid=621465494" class="link" target="_blank">
+        <span class="blink">NEW</span> Attention Students!Click here to view your Semester 1 course time table
+    </a>
 
 </body>
 </html>
-
