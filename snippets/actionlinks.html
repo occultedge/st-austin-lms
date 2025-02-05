@@ -13,12 +13,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%; /* Ensures proper alignment */
+            height: 100vh; /* Ensures proper alignment */
+            box-sizing: border-box;
         }
 
         .action-links {
             display: flex;
+            flex-wrap: wrap; /* Allows buttons to wrap to the next line on smaller screens */
             gap: 10px; /* Space between the buttons */
+            justify-content: center;
+            max-width: 100%; /* Prevents container from overflowing */
         }
 
         a {
@@ -31,23 +35,32 @@
             transition: background-color 0.3s;
             font-size: 14px;
             white-space: nowrap; /* Ensures the text stays in a single line */
+            max-width: 200px; /* Max width for each link */
+            text-align: center; /* Centers the text inside the link */
         }
 
         a:hover {
             background-color: #0056b3;
         }
+
+        @media (max-width: 600px) {
+            a {
+                font-size: 12px; /* Smaller text size for mobile */
+                padding: 8px 12px; /* Adjust padding for smaller screens */
+                width: 100%; /* Make links fill the container on small screens */
+            }
+        }
     </style>
 </head>
+<body>
 
     <div class="action-links">
         <a href="vdoplyryoutbecode.html" target="_blank">See a demo of LMS</a>
-       <a href="slctcrse.html" target="_blank">
-        Medical Students Begin Learning Now</a>
-         <a href= "https://www.orionfr.co.in/blank" target="_blank">
-        Accounting Students Click Here</a>
-        <a href= "https://www.orionfr.co.in/blank" target="_blank">
-        Get your Login Details</a>
+        <a href="slctcrse.html" target="_blank">Medical Students Begin Learning Now</a>
+        <a href="https://www.orionfr.co.in/blank" target="_blank">Accounting Students Click Here</a>
+        <a href="https://www.orionfr.co.in/blank" target="_blank">Get your Login Details</a>
     </div>
+
 </body>
 </html>
 

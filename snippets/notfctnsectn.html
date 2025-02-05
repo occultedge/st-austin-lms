@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            background-color: #ffffff;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            z-index: 1000;
+            white-space: nowrap;
+            animation: scroll 15s linear infinite;
+        }
+
+        .blink {
+            color: red;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notification-container">
+        <span><span class="blink">NEW</span> Attention Medical Students feb batch. Your student login ID and password are now successfully activated on the system.</span>
+    </div>
+
+</body>
+</html>
+
