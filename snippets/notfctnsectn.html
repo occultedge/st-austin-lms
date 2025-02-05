@@ -17,7 +17,7 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
+            width: 100%;
             background-color: #ffffff; /* White background */
             color: black;
             padding: 10px;
@@ -27,7 +27,9 @@
             border-radius: 5px;
             z-index: 1000;
             white-space: nowrap;
-            animation: scroll 20s linear infinite;
+            animation: scroll 30s linear infinite;
+            display: flex;
+            justify-content: space-evenly;
         }
 
         .blink {
@@ -36,12 +38,11 @@
         }
 
         .link {
-            display: block;
-            margin-top: 10px;
             font-size: 14px;
             text-decoration: none;
             color: #007bff; /* Blue color for the link */
-            animation: scroll 20s linear infinite;
+            margin: 0 20px;
+            animation: scroll 30s linear infinite;
         }
 
         .link:hover {
@@ -65,16 +66,16 @@
     </style>
 </head>
 <body>
-<a class="blink" target="_blank">
-        <span class="blink">NEW</span> Your student login ID and password are now successfully activated. You can start using the system now
-    </a>
-   
-
-    <a href="https://docs.google.com/spreadsheets/d/1mhEHnxKWdbs4-9GgfhZiYVNJRyzlmunE/edit?gid=621465494#gid=621465494" class="link" target="_blank">
-        <span class="blink">NEW</span> Attention Students!Click here to view your Semester 1 course time table
-    </a>
- <a href="https://join.skype.com/shaeu6a4ncHh" class="link" target="_blank">
-        <span class="blink">NEW</span> Click here to attend the live online lecture on Skype.
-    </a>
+    <div class="notification-container">
+        <a class="link" target="_blank">
+            <span class="blink">NEW</span> Your student login ID and password are now successfully activated. You can start using the system now.
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1mhEHnxKWdbs4-9GgfhZiYVNJRyzlmunE/edit?gid=621465494#gid=621465494" class="link" target="_blank">
+            <span class="blink">NEW</span> Attention Students! Click here to view your Semester 1 course time table.
+        </a>
+        <a href="https://join.skype.com/shaeu6a4ncHh" class="link" target="_blank">
+            <span class="blink">NEW</span> Click here to attend the live online lecture on Skype.
+        </a>
+    </div>
 </body>
 </html>
