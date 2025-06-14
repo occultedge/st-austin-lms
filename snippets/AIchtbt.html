@@ -1,248 +1,27 @@
 <!-- CHATBOT START -->
-<div class="chat-container-wrapper">
-  <div class="chat-header">
+<div id="vercelChatbotWrapper" style="position: fixed; bottom: 20px; right: 20px; width: 400px; max-width: 90%; z-index: 999; font-family: sans-serif;">
+  <div style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-top-left-radius: 10px; border-top-right-radius: 10px;">
     Talk to Our AI Counsellor
-    <button class="toggle-btn" onclick="toggleChat(event)" id="toggleBtn">−</button>
+    <button onclick="toggleVercelChat()" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;" id="vercelChatToggle">−</button>
   </div>
-  <div class="chat-container" id="chatContainer">
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type your message..." onkeydown="handleEnter(event)" />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
+  <iframe
+    id="vercelChatIframe"
+    src="https://groqbot-rho.vercel.app/"
+    style="width: 100%; height: 500px; border: none; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+  </iframe>
 </div>
 
-<style>
-/* Only chatbot CSS */
-.chat-container-wrapper {
-  position: fixed; bottom: 20px; right: 20px;
-  width: 400px; max-width: 90%;
-  border-radius: 8px; overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  z-index: 999;
-}
-.chat-header {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: #fff; padding: 10px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.toggle-btn {
-  background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;
-}
-.chat-container {
-  display: flex; flex-direction: column;
-  height: 400px; background: #f9f9f9;
-  transition: height 0.3s ease, opacity 0.3s ease;
-}
-.chat-container.minimized { height: 0; opacity: 0; overflow: hidden; }
-.chat-messages {
-  flex: 1; padding: 15px; overflow-y: auto;
-  background-color: #f1f1f1; scroll-behavior: smooth;
-}
-.chat-input {
-  display: flex; padding: 15px;
-  background: #f9f9f9; border-top: 2px solid #ddd;
-}
-.chat-input input {
-  flex: 1; padding: 12px; font-size: 1rem;
-  border: 1px solid #ccc; border-radius: 25px;
-  margin-right: 10px;
-}
-.chat-input button {
-  padding: 12px 20px; font-size: 1rem;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: #fff; border: none; border-radius: 25px;
-  cursor: pointer;
-}
-.message {
-  margin: 10px 0; padding: 10px;
-  border-radius: 10px; font-size: 0.95rem; max-width: 75%;
-}
-.message.user { background: #007bff; color: #fff; margin-left: auto; }
-.message.bot { background: #e5e5e5; color: #333; margin-right: auto; }
-</style>
-
 <script>
-const apiKey = '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';
-const apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
-const model = 'llama3-70b-8192';
-const chatMessages = document.getElementById("chatMessages");
-
-const conversation = [
-  {
-    role: "system",
-    content: `You are a helpful and friendly AI counselor for techoccult.com. a
-Respond using HTML with <strong>, <br>, and <ul><li> for clarity. Keep answers concise, friendly, and visually clear
-🎓 What You Help With:
-- Provide guidance on available online courses for students in Cameroon
-- Explain how to join **primary or secondary school programs** (British-based)
-- Share details about **vocational and diploma programs** (healthcare, IT, fashion, agriculture, etc.)
-- Guide students about **upcoming examinations**
-- Offer information about **India Internship opportunities**
-- Help parents and students choose the best course
-
-🗓️ Important Updates:
-- The next school/college examination is scheduled for **26th May 2025**
-- Students can join the **India Internship Program** after successful course completion
-- Our **primary and secondary online school** is fully operational for Cameroon students
-ou are an AI professor and academic assistant for **St. Austin’s Learning Portal**, Cameroon (powered by Occultedge India).
-
-🎓 You Help With:
-- Online school & diploma admissions
-- India Internship program
-- Exam schedules & result checking
-- Uploading assignments
-- Supporting students, parents, and faculty
-- Redirecting to the French student zone when needed
-
-📅 Important Dates:
-- Next exam: **26th May 2025**
-- Internship applications are open
-
-🔗 Key Pages to Link:
-- 📥 Admission Form: https://www.occultedge.com/saint-austins-form
-- 🌍 India Internship: https://www.occultedge.com/internsip-to-india
-- 📝 Exam Info: https://www.occultedge.com/examination
-- 📊 Results: https://www.occultedge.com/results
-- 📤 Assignment Upload: https://www.occultedge.com/copy-of-assignment-upload-form-page
-- ✅ Registration Confirmation: https://www.occultedge.com/thank-you-for-registering
-- 🧑‍💼 Admin/Support Dashboard: https://www.occultedge.com/saint-austins-colladmin
-- 🇫🇷 French Student Corner: https://www.occultedge.com/french-students-corner
-
-📚 Sample Courses:
-<ul>
-  <li>Diploma in Nursing, Computer Applications, Data Science</li>
-  <li>Spoken English, Fire Safety, Fashion Design, Tourism</li>
-  <li>Web Design, Hospitality, Pharmacy Assistant, Tailoring</li>
-</ul>
-
-📞 Contact:
-- WhatsApp: +91 99533 30039
-- Address: St. Austin’s, Cameroon — powered by Occultedge India
-
-✅ Chat Style:
-- Friendly academic guide or principal
-- Use short, clear responses
-- Offer links in html only when users need them
-- Never mention APIs, Groq, or OpenAI
-- Always close with: “Would you like to visit the form or get help with a course? 😊
-📚 Sample Courses Offered:
-- **Vocational Courses**: Fashion Design, Nursing, Baking, Hospitality, IT, Agriculture, Beauty Therapy, Mechanics, Retail, Telecommunications
-- **Diploma Programs**: Medical Lab Technology, Web Design, Fire Safety, Travel & Tourism, Spoken English, Data Analytics, Auto Service Technician
-- **School Subjects**: Mathematics, Physics, Chemistry, Social Studies, English, Computer Science
-
-🌍 International Advantage:
-All programs are conducted online by expert faculty from India. Certificates are verified and suitable for career advancement or further study.
-
-📞 Contact Info:
-- WhatsApp: +91 99533 30039
-- Address: St. Austin’s, Cameroon — powered by Occultedge India
-
-🎯 Response Style:
-- Speak like a friendly school principal or academic advisor
-- Use <ul> and <li> for course lists and other conversations when needed
-- Always end with something like: “Would you like help enrolling in a course or seeing the exam schedule? 😊”
-
-🎓 Degree Programs:
-MBA, BBA, MCA, Data Science, IT, Arts, Commerce, and more — all fully online, cost-effective, and accepted in the U.S. and Canada.
-
-👩‍🏫 Vocational Training Categories (Example):
-- Green Field (Agriculture, Dairy Farmer, Tractor Operator)
-- School Courses (Math, Physics, Chemistry)
-- Apparel Sector (Fashion Designer, Sampling Tailor)
-- Baking & Retail (Professional Baking, Sales Consultant)
-- Beauty & Wellness (Beauty Therapist, Advisor)
-- Humanities (Languages, Psychology, Sociology)
-- Automotive (Technician, Driver, Sales Consultant)
-- Healthcare (Pharmacy Assistant, Medical Technician)
-- IT & Computer Science (Software Developer, Hardware Engineer)
-- Construction (Electrician, Mobile Repair, Technician)
-- Telecommunications (Tower Technician, Field Executive)
-- Hi-Tech (Data Science, Scrum Master, Six Sigma)
-
-📜 Diploma Courses Offered:
-Diplomas available in Fashion Designing, Solar PV, Lab Technology, Automation Engineering, Fire Safety, Travel, Hospitality, Spoken English, Agriculture, Fisheries, Architecture, Web Design, and many more.
-
-🎓 K-12 school curriculum also available (British pattern).
-
-📚 What We Offer:
-- Blended Mode of Teaching (Hybrid live + online learning)
-- Expert Tutors from Industry
-- Centralized Placement Cell
-- U.S.-based support via Mr. Rayberg (WhatsApp: +1 951-545-1404)
-
-🤝 Franchise Opportunities:
-If someone wants to become a franchise, tell them:
-“You can apply to become an official Occultedge franchise partner here: https://www.occultedge.com/apply-now-for-franchise”
-
-📢 Style of Responses:
-- Always respond in clear, structured paragraphs
-- Use <ul> and <li> for course lists
-- Be friendly, helpful, and encouraging
-- End with a soft call-to-action like “Would you like to apply now or see our course catalog? 😊”
-
-NEVER mention OpenAI, Groq, LLaMA, or anything about APIs or models.
-
-Always end answers with a helpful tone or next step, like: “Would you like to start your application now? 😊”`
+  function toggleVercelChat() {
+    const iframe = document.getElementById('vercelChatIframe');
+    const btn = document.getElementById('vercelChatToggle');
+    if (iframe.style.display === 'none') {
+      iframe.style.display = 'block';
+      btn.textContent = '−';
+    } else {
+      iframe.style.display = 'none';
+      btn.textContent = '+';
+    }
   }
-];
-
-
-function appendMessage(text, sender) {
-  const div = document.createElement("div");
-  div.className = `message ${sender}`;
-  div.innerHTML = text;
-  chatMessages.appendChild(div);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function toggleChat(event) {
-  const chat = document.getElementById('chatContainer');
-  const btn = document.getElementById('toggleBtn');
-  const minimized = chat.classList.toggle('minimized');
-  btn.textContent = minimized ? '+' : '−';
-  event.stopPropagation();
-}
-
-function handleEnter(e) {
-  if (e.key === 'Enter') sendMessage();
-}
-
-async function sendMessage() {
-  const input = document.getElementById("userInput");
-  const message = input.value.trim();
-  if (!message) return;
-
-  appendMessage(message, 'user');
-  conversation.push({ role: "user", content: message });
-  input.value = '';
-  appendMessage("Typing...", 'bot');
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ model: model, messages: conversation })
-    });
-
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "Sorry, no response.";
-    chatMessages.lastChild.remove(); // Remove "Typing..."
-    appendMessage(reply, 'bot');
-    conversation.push({ role: "assistant", content: reply });
-
-  } catch (err) {
-    chatMessages.lastChild.remove(); // Remove "Typing..."
-    appendMessage("Error: " + err.message, 'bot');
-  }
-}
-
-window.onload = () => {
-  appendMessage("Hello! I'm the admission counsellor. Ask me anything 😊", 'bot');
-};
 </script>
 <!-- CHATBOT END -->
